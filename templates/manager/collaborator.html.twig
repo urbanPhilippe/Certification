@@ -1,0 +1,67 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Mes collaborateurs{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="collab-list">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3>Mes collaborateurs</h3>
+                    </div>
+                    <div class="card-body pt-0 px-0">
+                        <table class="table table-striped collaborators">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-uppercase text-center">Nom</th>
+                                    <th scope="col" class="text-uppercase text-center not-mobile">Prénom</th>
+                                    <th scope="col" class="text-uppercase text-center desktop-xl">Mail</th>
+                                    <th scope="col" class="text-uppercase text-center desktop-l">Fonction</th>
+                                    <th scope="col" class="text-uppercase text-center not-under-mobile">Résidence</th>
+                                    <th scope="col" class="text-uppercase text-center"></th>
+                                    <th scope="col" class="text-uppercase text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for collaborator in collaborators %}
+                                <tr>
+                                    <td class="text-center align-middle">{{ collaborator.lastname }}
+                                        <p class="not-upper-mobile">{{ collaborator.firstname }}</p>
+                                    </td>
+                                    <td class="text-center align-middle not-mobile">{{ collaborator.firstname }}</td>
+                                    <td class="text-center align-middle desktop-xl">{{ collaborator.email }}</td>
+
+                                    <td class="text-center align-middle desktop-l">
+                                    {% if collaborator.position %}
+                                        {{ collaborator.position.name }}
+                                    {% endif %}
+                                    </td>
+                                    <td class="text-center align-middle not-under-mobile">
+                                    {% if collaborator.residence %}
+                                        {{ collaborator.residence.city }}
+                                    {% endif %}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                       <a href="{{ path('appointment_new', {'id': collaborator.id}) }}" title="Prendre rendez-vous"><i class="far fa-calendar-check fa-lg"></i></a>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <a href="{{ path('profile', {'user': collaborator.id}) }}" title="Voir le profil"><i class="fas fa-arrow-circle-right"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3">Vous n'avez pas de collaborateur.</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

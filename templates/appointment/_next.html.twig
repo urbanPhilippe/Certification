@@ -1,0 +1,10 @@
+{% for appointment in nextAppointments %}
+    <p>Le {{ appointment.date|date ("d/m/y à G:i") }} avec
+    {% if is_granted('ROLE_MANAGER') %}
+        <b>{{ appointment.user.firstname }} {{ appointment.user.lastname }} </b></p>
+    {% elseif is_granted('ROLE_COLLABORATOR') %}
+        <b>{{ appointment.partner.firstname }} {{ appointment.partner.lastname }} </b></p>
+    {% endif %}
+{% else %}
+    <p>Pas de rendez-vous prévu</p>
+{% endfor %}

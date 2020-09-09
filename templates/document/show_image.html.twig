@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Image{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Image</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Document</th>
+                <td><img src="/upload/documents/{{ document.documentName }}" alt="vignette" class="vignette"></td>
+            </tr>
+            <tr>
+                <th>ULR du document</th>
+                <td><input class="copy-text" type="text" id="text-box" size="50"
+                           value="/upload/documents/{{ document.documentName }}"> <a title="Copier l'URL"> <i
+                                class="fas fa-copy copy-button ml-2"></i></a></td>
+            </tr>
+            <tr>
+                <th>Ajouté le</th>
+                <td>{{ document.createdAt ? document.createdAt|date('d/m/Y') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('document_index_images') }}" class="btn btn-primary mb-3">Retour</a>
+
+        {{ include('document/_delete_form_image.html.twig') }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('copyURL') }}
+{% endblock %}

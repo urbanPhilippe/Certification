@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nemea{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid d-flex flex-column">
+        <div class="page-header">
+            <h1 class="ml-5">{{ category.name }}</h1>
+            <div class="row">
+                {% for content in contents %}
+                    <div class="col-12 col-lg-4">
+                        <div class="card">
+                            <a href="{{ path('content_article', {'id': content.id}) }}">
+                                <h5 class="card-header font-weight-bold text-uppercase text-center py-4 mb-0">{{ content.title }}</h5>
+                            </a>
+
+                            <div class="card-body nemea-content">
+                                {{ content.begin|raw|nl2br }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="pagination align-self-end mr-4">
+            {{ knp_pagination_render(contents) }}
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Compte rendu{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    {% if appointment.summary %}
+                        <div class="card-header">
+
+                            {% if is_granted('ROLE_COLLABORATOR') %}
+                                <h1>Compte rendu du {{ appointment.date|date ("d/m/Y") }}
+                                    avec {{ appointment.partner.firstname }} {{ appointment.partner.lastname }}</h1>
+                            {% else %}
+                                <h1>Compte rendu du {{ appointment.date|date ("d/m/Y") }}
+                                    avec {{ appointment.user.firstname }} {{ appointment.user.lastname }}</h1>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            {{ appointment.summary|raw }}
+                        </div>
+                    {% else %}
+                        <div class="card-header">
+                            <p>Il n'y a pas de compte-rendu pour ce rendez-vous</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mb-5">
+        <a class="btn btn-primary" href="{{ path('profile', {'user': app.session.get('from')}) }}">Retour</a>
+    </div>
+
+{% endblock %}
+

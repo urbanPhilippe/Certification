@@ -1,0 +1,57 @@
+.profile-page {
+  margin-top: 3rem;
+  width: 85%;
+
+  .profile-card {
+
+    table {
+      width: 100%;
+
+      td {
+        padding-bottom: 1rem;
+      }
+
+      .progress-td {
+        width: 60%;
+      }
+    }
+  }
+}
+.link-profile {
+  color: $fontColor;
+  &:hover {
+    color: $yellow;
+  }
+
+
+}
+
+.appointment-table {
+  width: 95%;
+  tr {
+    height: 3rem;
+  }
+}
+
+@media only screen and (max-width:700px) {
+  .container-fluid.profile-page {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  h1 {
+    margin-left: 1rem;
+  }
+  .single-profile {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .icon-td {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  .with-span {
+    display: none;
+  }
+}

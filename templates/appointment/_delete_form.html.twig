@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('appointment_delete', {'id': appointment.id}) }}"
+      onsubmit="return confirm('Etes-vous sûr(e) de vouloir supprimer ce rendez-vous ?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ appointment.id) }}">
+    <button class="btn btn-danger mt-3 mb-4">Supprimer</button>
+</form>

@@ -1,0 +1,104 @@
+
+body {
+  font-family: $mainFont;
+  color: $fontColor;
+  background-color: $darkBackground;
+}
+
+.pagination {
+  .page-link {
+    color: $darkBlue;
+  }
+  .page-item.active {
+    .page-link {
+      background-color: $yellow;
+      border-color: $yellow;
+      color: $darkBlue;
+    }
+  }
+}
+
+.container, .container-fluid {
+  margin-top: 2rem;
+}
+
+.main {
+  display: flex;
+}
+
+.main-content {
+  width: calc(100vw - 10rem);
+  margin-left: 10rem;
+}
+
+.table, label {
+  color: $fontColor;
+}
+
+h1 {
+  margin-bottom: 2rem;
+  color: $fontColor;
+}
+
+.collaborators {
+  color: $fontColor;
+}
+
+.collab-list{
+    width: 100%;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+hr {
+  background-color: $yellow;
+}
+
+@media screen and (max-width: 700px) {
+    .main-content{
+        width: 100vw;
+        margin-left: 0;
+    }
+
+    .container, .container-fluid {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 0;
+    }
+
+    .not-mobile{
+        display: none;
+    }
+    .not-upper-mobile{
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .not-under-mobile{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 701px) {
+    .not-upper-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .desktop-l{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .desktop-xl{
+        display: none;
+ }
+}
+

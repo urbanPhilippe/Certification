@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Toutes les images{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="card w-100 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Toutes les images</h1>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="{{ path('document_new_image') }}" class="btn btn-primary mb-3">Ajouter une image</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>URL de l'image</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for image in images %}
+                            <tr>
+                                <td class="text-center"><img src="/upload/documents/{{ image.documentName }}" alt="vignette" class="vignette"></td>
+                                <td class="align-middle text-center"><input class="copy-text" type="text" id="text-box-{{ image.id }}" size="20"
+                                           value="/upload/documents/{{ image.documentName }}" readonly>
+                                    <a title="Copier l'URL" class="copy-button">
+                                        <i class="fas fa-copy ml-2"></i>
+                                    </a>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <form method="post" action="{{ path('document_delete_image', {'id': image.id}) }}"
+                                          onsubmit="return confirm('La suppression de cet élément est définitive, êtes-vous sûr(e)?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                                        <button class="btn btn-danger">Supprimer</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Aucun document</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('copyURL') }}
+{% endblock %}
+

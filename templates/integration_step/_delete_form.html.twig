@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('integration_step_delete', {'id': integration_step.id}) }}"
+      onsubmit="return confirm('La suppression de cette étape est définitive, êtes-vous sûr(e)?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ integration_step.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>

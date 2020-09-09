@@ -1,0 +1,27 @@
+h5.card-header
+{
+  color: $yellow;
+}
+
+div .card.card-progidoc {
+  margin-top: -4rem;
+}
+
+@media only screen and (max-width:700px) {
+
+  .main-content {
+    width: 100%;
+  }
+  div .card.card-progidoc {
+    margin-top: 2rem;
+  }
+  p.card-text.card-text-toolbox {
+    font-size: smaller;
+  }
+  ul.toolbox {
+    font-size: smaller;
+  }
+  div.card-footer.text-muted {
+    font-size: smaller;
+  }
+}

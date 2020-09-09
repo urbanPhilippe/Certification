@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Tous les articles{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="card w-100 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Tous les articles</h1>
+                    </div>
+                    <div class="row d-flex justify-content-md-start ml-4 mt-3">
+                        <div class="col-3 text-center">
+                            <a href="{{ path('content_new') }}" class="btn btn-primary mb-3">Ajouter un article</a>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="{{ path('category_new') }}" class="btn btn-primary mb-3">Ajouter une catégorie</a>
+                        </div>
+                        <div class="col-5">
+                            {{ form_start(form) }}
+                            <div class="row">
+                                <div class="col-5">{{ form_row(form.category) }}</div>
+                                <div class="col-5">{{ form_row(form.text) }}</div>
+                                <div class="col-2">
+                                    <button class="btn btn-primary">Rechercher</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-uppercase">Titre</th>
+                                <th scope="col" class="text-uppercase">Catégorie</th>
+                                <th scope="col" class="text-center text-uppercase">Crée le</th>
+                                <th scope="col" class="text-center text-uppercase">par</th>
+                                <th scope="col" class="text-center text-uppercase">Modifié</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for content in contents %}
+                            <tr>
+                                <td class="align-middle">{{ content.title }}</td>
+                                <td class="align-middle">{{ content.category.name }}</td>
+                                <td class="align-middle text-center">
+                                    {{ content.createdAt ? content.createdAt|date('d/m/Y') : '' }}
+                                </td>
+                                <td class="align-middle text-center">
+                                    {{ content.user.firstname}} {{ content.user.lastname}}
+                                </td>
+                                <td class="align-middle">
+                                    {{ content.updatedAt ? content.updatedAt|date('d/m/Y') : '' }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a class="text-decoration-none mr-2" title="Voir"
+                                       href="{{ path('content_show', {'id': content.id}) }}">
+                                        <i class="fas fa-search-plus"></i>
+                                    </a>
+                                    <a class="text-decoration-none" title="Modifier"
+                                       href="{{ path('content_edit', {'id': content.id}) }}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Aucun article</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

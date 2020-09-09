@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Planning des rendez-vous{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Planning des rendez-vous</h1>
+                        <div class="card-body">
+
+                            <table class="table table-striped">
+                                <caption class="agenda"><a href="{{ path('appointment_new', {'id': app.user.id}) }}"><i
+                                                class="far fa-calendar-check fa-lg"></i> Planifier un rendez-vous</a>
+                                </caption>
+                                <thead>
+                                <tr>
+                                    <th>Collaborateur</th>
+                                    <th>Organisateur</th>
+                                    <th>Date RDV</th>
+                                    <th>Planifié le</th>
+                                    <th>Modifié le</th>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <th></th>
+                                    {% endif %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for appointment in appointments %}
+                                    <tr>
+                                        <td>{{ appointment.user.firstname }} {{ appointment.user.lastname }}</td>
+                                        <td>{{ appointment.partner.firstname }} {{ appointment.partner.lastname }}</td>
+                                        <td>{{ appointment.date ? appointment.date|date('d/m/Y H:i') : '' }}</td>
+                                        <td>{{ appointment.createdAt ? appointment.createdAt|date('d/m/Y') : '' }}</td>
+                                        <td>{{ appointment.updatedAt ? appointment.updatedAt|date('d/m/Y') : '' }}</td>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <td>
+                                                <a href="{{ path('appointment_edit', {'id': appointment.id}) }}">Modifier</a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5">Aucun rendez-vous programmé</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

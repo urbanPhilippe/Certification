@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Modification du mot de passe{% endblock %}
+
+{% block body %}
+    <div class="container mb-5">
+        <div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('user_index') }}"> Retour à la liste des utilisateurs</a>
+                {% else %}
+                <a href="{{ path('profile', {'user': app.user.id} ) }}"> Retour à mon profil</a>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-sm-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Modifier le mot de passe</h1>
+                    </div>
+                    <div class="m-3">
+                        <form method="post">
+                            <div class="mt-3">
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-primary mb-5 mt-3">{{ button_label|default('Modifier') }}</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+{% endblock %}

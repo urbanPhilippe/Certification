@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Modifier un rendez-vous{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card w-100 m-auto">
+                    <div class="card-header">
+                        <h1>Modifier un rendez-vous</h1>
+
+                        {{ include('appointment/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+                        {{ include('appointment/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4 mb-5">
+        <a class="btn btn-primary" href="{{ path('profile', {'user': app.session.get('from')}) }}">Retour</a>
+    </div>
+
+{% endblock %}

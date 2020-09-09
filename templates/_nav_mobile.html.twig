@@ -1,0 +1,65 @@
+<div class="pos-f-t">
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="p-1 nav-color">
+                {{ render ( controller (
+                    'App\\Controller\\CategoryController::navigation'
+                )) }}
+            <p class="nav-title font-weight-bold text-uppercase text-center px-2 small py-2 mb-0">
+                    Mon Welcome Pack
+            </p>
+            <ul class="nav flex-row mb-0 justify-content-center">
+                    <li class="nav-item">
+                        <a href="{{ path('profile', {'user': app.user.id }) }}" class="nav-link">
+                            <i class="fas fa-user mr-2 fa-fw"></i>
+                            Mon profil
+                        </a>
+                    </li>
+                {% if is_granted('ROLE_COLLABORATOR') %}
+                    <li class="nav-item">
+                        <a href="{{ path('timeline', {'user': app.user.id }) }}#active" class="nav-link">
+                            <i class="fas fa-walking mr-2 fa-fw"></i>
+                            Parcours
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('checklist_item_checklist', {'user': app.user.id }) }}" class="nav-link">
+                            <i class="fas fa-tasks mr-2 fa-fw"></i>
+                            Checklist
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+            {% if is_granted('ROLE_ADMIN') %}
+                <p class="nav-title font-weight-bold text-uppercase text-center px-2 small py-2 mb-0">
+                        Administrateur
+                </p>
+                <ul class="nav flex-row justify-content-center mb-0">
+                    <li class="nav-item">
+                        <a href="{{ path('admin') }}" class="nav-link">
+                            <i class="fas fa-user-cog mr-3 fa-fw"></i>
+                            Gestion
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+            <ul class="nav flex-row mb-0 mt-2 justify-content-end">
+                <li class="nav-item">
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="nav-link">
+                            Déconnexion
+                            <i class="fas fa-sign-out-alt fa-fw"></i>
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark nav-color">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div>
+            <p class="text-uppercase nav-title">menu</p>
+        </div>
+    </nav>
+</div>

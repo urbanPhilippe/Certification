@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Document{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Document</h1>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Document</th>
+                <td><a href="/upload/documents/{{ document.documentName }}"
+                       target="_blank">{{ document.documentName }}</a></td>
+            </tr>
+            <tr>
+                <th>ULR du document</th>
+                <td><input class="copy-text" type="text" id="text-box" size="50"
+                           value="/upload/documents/{{ document.documentName }}"> <a title="Copier l'URL"> <i
+                                class="fas fa-copy copy-button ml-2"></i></a></td>
+            </tr>
+            <tr>
+                <th>Ajouté le</th>
+                <td>{{ document.createdAt ? document.createdAt|date('d/m/Y') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('document_index_texts') }}" class="btn btn-primary mb-3">Retour</a>
+
+        {{ include('document/_delete_form_text.html.twig') }}
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('copyURL') }}
+{% endblock %}

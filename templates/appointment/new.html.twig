@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Planifier un rendez-vous{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card w-100 m-auto">
+                    <div class="card-header">
+                        <h1>Planifier un rendez-vous avec {{ collaborator.firstname }} {{ collaborator.lastname }}</h1>
+                    </div>
+                        <div class="m-3">
+                        {{ include('appointment/_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="d-flex justify-content-center mb-5">
+        <a class="btn btn-primary mt-3" href="{{ path('manager_show', {'user': app.user.id }) }}">Retour</a>
+    </div>
+
+{% endblock %}

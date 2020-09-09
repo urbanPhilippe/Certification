@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Rendez-vous{% endblock %}
+
+{% block body %}
+
+    <h1>Rendez-vous</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ appointment.id }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ appointment.date ? appointment.date|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ appointment.createdAt ? appointment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>UpdatedAt</th>
+            <td>{{ appointment.updatedAt ? appointment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('appointment_index') }}">Retour</a>
+
+    <a href="{{ path('appointment_edit', {'id': appointment.id}) }}">Modifier</a>
+
+    {{ include('appointment/_delete_form.html.twig') }}
+
+{% endblock %}

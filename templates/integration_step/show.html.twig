@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Détails de l'étape d'intégration{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h1>Étape d'intégration</h1>
+                    </div>
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th>Position</th>
+                            <td>{{ integration_step.number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ integration_step.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ integration_step.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Durée (en jours)</th>
+                            <td>{{ integration_step.duration }}</td>
+                        </tr>
+                        <tr>
+                            <th> Icône FontAwesome</th>
+                            <td>
+                                <i class="{{ integration_step.fontAwesome }}"></i>
+                                <span>{{ integration_step.fontAwesome }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Couleur héxadécimale</th>
+                            <td>
+                                <div class="color-icon" style="background-color: {{ integration_step.color }};"></div>
+                                <span class="ml-1">{{ integration_step.color }}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex align-items-end">
+                        <a class="btn btn-primary mr-4 ml-4 mb-4"
+                           href="{{ path('integration_step_edit', {'id': integration_step.id}) }}">Modifier</a>
+                        <div class="mb-4">
+                            {{ include('integration_step/_delete_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mb-5">
+            <a class="btn btn-primary" href="{{ path('integration_step_index') }}">Retour</a>
+        </div>
+    </div>
+
+{% endblock %}

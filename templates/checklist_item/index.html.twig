@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Gestion de la checklist{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="card w-75 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Gestion de la checklist</h1>
+                    </div>
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href="{{ path('checklist_item_new') }}">Ajouter un élément</a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Nom</th>
+                                <th>Catégorie</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for checklist_item in checklist_items %}
+                            <tr>
+                                <td class="align-middle">{{ checklist_item.name }}</td>
+                                <td class="text-center align-middle">{{ checklist_item.category }}</td>
+                                <td class="text-center align-middle">
+                                    <a class="text-decoration-none" title="Modifier"
+                                       href="{{ path('checklist_item_edit', {'id': checklist_item.id}) }}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">Aucun enregistrement</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

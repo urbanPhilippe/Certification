@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Gestion du parcours d'intégration{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="card w-100 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Gestion des étapes du parcours d'intégration</h1>
+                    </div>
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href="{{ path('integration_step_new') }}">Ajouter une étape</a>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="container no-gutters">
+                                <th scope="col" class="text-uppercase">Position</th>
+                                <th scope="col" class="text-uppercase">Nom</th>
+                                <th scope="col" class="text-uppercase">Description</th>
+                                <th scope="col" class="text-center text-uppercase">Durée</th>
+                                <th scope="col" class="text-center text-uppercase">Icône</th>
+                                <th scope="col" class="text-center text-uppercase">Couleur</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for integration_step in integration_steps %}
+                            <tr>
+                                <td class="text-center align-middle">{{ integration_step.number }}</td>
+                                <td class="align-middle">{{ integration_step.name }}</td>
+                                <td class="align-middle">{{ integration_step.description }}</td>
+                                <td class="text-center align-middle">{{ integration_step.duration }}</td>
+                                <td class="text-center align-middle">
+                                    <i class="{{ integration_step.fontAwesome }}"></i>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="color-icon" style="background-color: {{ integration_step.color }};"></div>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a class="text-decoration-none" title="Voir"
+                                       href="{{ path('integration_step_show', {'id': integration_step.id}) }}">
+                                        <i class="fas fa-search-plus"></i>
+                                    </a>
+                                    <a class="text-decoration-none" title="Modifier"
+                                       href="{{ path('integration_step_edit', {'id': integration_step.id}) }}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">Aucun enregistrement</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

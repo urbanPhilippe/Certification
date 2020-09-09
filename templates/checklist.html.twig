@@ -1,0 +1,88 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Ma checklist{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
+            <div class="page-header">
+                <h1>Checklist de {{ collaborator.firstname }} {{ collaborator.lastname }}</h1>
+            </div>
+            <a class="btn btn-primary mb-5" href="{{ path('profile', {'user': collaborator.id }) }}">Retour au profil du
+                collaborateur</a>
+        {% else %}
+            <div class="page-header">
+                <h1>Ma checklist</h1>
+            </div>
+        {% endif %}
+        <div class="progress" style="width: 70%;">
+            <div class="progress-bar progress-bar-striped" role="progressbar"
+                 style="width: {{ percent }}%"
+                 aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    {% if is_granted('ROLE_MANAGER') %}
+                        <div class="card-header">
+                            <h3>{{ collaborator.firstname }} {{ collaborator.lastname }} doit :</h3>
+                        </div>
+                    {% else %}
+                        <div class="card-header">
+                            <h3>Ma liste de choses à faire</h3>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {% for category, choices in form.children.checklistItems.vars.choices %}
+                                {% if category == constant('App\\Entity\\ChecklistItem::TODO') %}
+                                    {% for key, choice in choices %}
+                                        {{ form_widget(form.checklistItems[key]) }}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    {% if is_granted('ROLE_MANAGER') %}
+                        <div class="card-header">
+                            <h3>{{ collaborator.firstname }} {{ collaborator.lastname }} a reçu :</h3>
+                        </div>
+                    {% else %}
+                        <div class="card-header">
+                            <h3>Mes documents</h3>
+                        </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="form-group">
+
+                            {% for category, choices in form.children.checklistItems.vars.choices %}
+                                {% if category == constant('App\\Entity\\ChecklistItem::DOC') %}
+                                    {% for key, choice in choices %}
+                                        {{ form_widget(form.checklistItems[key]) }}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if is_granted('ROLE_COLLABORATOR') %}
+        <div class="row justify-content-end">
+            <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6">
+                <button class="btn btn-primary mb-3">Mettre à jour</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

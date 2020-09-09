@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Nouveau Contenu{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card w-100 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Créer du nouveau contenu</h1>
+                    </div>
+                    <div class="m-3">
+                        {{ include('content/_form.html.twig') }}
+                        <a class="btn btn-primary mt-3" href="{{ path('document_index_texts') }}" target="_blank">Voir
+                            les documents disponibles</a>
+                        <a class="btn btn-primary mt-3" href="{{ path('document_index_images') }}" target="_blank">Voir
+                            les images disponibles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-md-center mt-3 mb-3">
+        <a class="btn btn-primary" href="{{ path('content_index') }}">Retour</a>
+    </div>
+
+{% endblock %}

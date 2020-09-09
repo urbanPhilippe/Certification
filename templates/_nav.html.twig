@@ -1,0 +1,65 @@
+<div class="navigation vertical-nav" id="sidebar">
+    <div class="nav-content">
+        <div class="cornerlogo">
+            <div class="logo-circle">
+                <img src="{{ asset('build/images/logo.png') }}" alt="logo">
+            </div>
+        </div>
+        <div class="menus">
+            <ul class="nav flex-column mb-0 pb-3">
+                <li class="nav-item">
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="nav-link ml-3">
+                            Déconnexion
+                            <i class="fas fa-sign-out-alt fa-fw"></i>
+                        </a>
+                    {% endif %}
+                </li>
+            </ul>
+
+            {# render controller to display list of articles category in navbar #}
+            {{ render ( controller (
+                'App\\Controller\\CategoryController::navigation'
+            )) }}
+
+                <p class="nav-title font-weight-bold text-uppercase text-center px-2 small pt-4 pb-2 mb-0">Mon Welcome
+                    Pack</p>
+
+                <ul class="nav flex-column mb-0">
+                    <li class="nav-item">
+                        <a href="{{ path('profile', {'user': app.user.id }) }}" class="nav-link">
+                            <i class="fas fa-user mr-3 fa-fw"></i>
+                            Mon profil
+                        </a>
+                    </li>
+                    {% if is_granted('ROLE_COLLABORATOR') %}
+                        <li class="nav-item">
+                            <a href="{{ path('timeline', {'user': app.user.id }) }}#active" class="nav-link">
+                                <i class="fas fa-walking mr-3 fa-fw"></i>
+                                Parcours
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ path('checklist_item_checklist', {'user': app.user.id }) }}" class="nav-link">
+                                <i class="fas fa-tasks mr-3 fa-fw"></i>
+                                Checklist
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <p class="nav-title font-weight-bold text-uppercase text-center px-2 small pt-4 pb-2 mb-0">
+                    Administrateur</p>
+                <ul class="nav flex-column mb-0">
+                    <li class="nav-item">
+                        <a href="{{ path('admin') }}" class="nav-link">
+                            <i class="fas fa-user-cog mr-3 fa-fw"></i>
+                            Gestion
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>

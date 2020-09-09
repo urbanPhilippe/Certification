@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Gestion des résidences{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <div class="card w-75 m-auto">
+                    <div class="card-header text-center">
+                        <h1>Gestion des résidences</h1>
+                    </div>
+                    <div class="text-center my-2">
+                        <a class="btn btn-primary" href="{{ path('residence_new') }}">Ajouter une résidence</a>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Ville</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for residence in residences %}
+                            <tr>
+                                <td>{{ residence.name }}</td>
+                                <td>{{ residence.city }}</td>
+                                <td class="text-center">
+                                    <a href="{{ path('residence_show', {'id': residence.id}) }}" title="Voir">
+                                        <i class="fas fa-search-plus mr-2"></i>
+                                    </a>
+                                    <a href="{{ path('residence_edit', {'id': residence.id}) }}" title="Modifier">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">aucun enregistrement</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
