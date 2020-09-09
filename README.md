@@ -1,4 +1,20 @@
-# Project 3 - Starter Kit - Symfony 4.4.*
+# ABSTRACT
+
+This is my end of study project carried out for a real client. Our team was made up of 4 students from Bordeaux WildCode school, specialized in php Symfony 4.4.
+Our customer wanted to develop a web application that follow up the professional integration of new collaborators.
+Three types of users are concerned : collaborators, managers and HR department as administrator.
+From the front-end point of view, this application is completely responsive. But, a special attention was paid
+to use it with desktop computer and provide an intuitive dashboard. By using this application, users can gain
+some visibility to the integration process and contribute to its success.
+From the back-end point of view, this application allows or denies access according to the roles assigned to
+users in the company. The new collaborators’ checklist or timeline evolve in light of their arrival date or
+entered parameters. Moreover, administrators can update a major part of the contents through a panel of
+management.
+By focusing on a better communication betwen different actors, visibility and others external factors,
+company can expect a double growth of its profits in 2022.
+
+
+# Starter Kit - Symfony 4.4.*
 
 ## Getting Started for Projects
 
@@ -85,4 +101,3 @@ SOFTWARE.
 
 ## Acknowledgments
 
-# Certification
